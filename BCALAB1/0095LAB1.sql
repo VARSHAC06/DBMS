@@ -118,42 +118,68 @@ alter table Courses rename to CoursesDetails;
 -- - EnrollmentDate
 
 -- Write your SQL query below Codespace:
- create table enrolloments
- (enrollmentId varchar(30) primary key ,
- studentId varchar(10), 
- courseId varchar(10) ,
- Foreign Key (StudentId) referencing student(S,
- Foreign Key referencing courses table,
- enrollmentdate date );
- 
-DESC ENROLLMENTS; -- [ [ COPYPASTE OF THE OUTPUT in CSV Format and terminate with ; ] ]
+create table Enrollments
+(EmailID varchar(10) Primary Key,
+StudentID varchar(10),
+CourseID varchar(15),
+foreign key (StudentID) references StudentDetails(StudentID),
+foreign key (CourseID) references Course(CourseID),
+EnrollmentDate date
+);
+
+desc enrollments; -- [ [ COPYPASTE OF THE OUTPUT in CSV Format and terminate with ; ] ]
 -- OUTPUT :
+/*'EmailID', 'varchar(10)', 'NO', 'PRI', NULL, ''
+'StudentID', 'varchar(10)', 'YES', 'MUL', NULL, ''
+'CourseID', 'varchar(15)', 'YES', 'MUL', NULL, ''
+'EnrollmentDate', 'date', 'YES', '', NULL, ''*/
+
 
 -- Alter the table and 2 new columns
+alter table Enrollments add (Semester varchar(10), Grade varchar(2));
 -- Modify a column data type
+alter table Enrollments modify Grade varchar(5);
 -- Rename a column
+alter table Enrollments rename column Grade to FinalGrade;
 -- Drop a column
+alter table Enrollments drop FinalGrade;
 -- Rename the table
+alter table Enrollments rename to EnrollmentDetails;
 
 -- Task 4: Alter the Students Table
 -- Add a column 'PhoneNumber' to store student contact numbers.
 
 -- Write your SQL query below Codespace:
+alter table StudentDetails add PhoneNumber varchar(15);
 
-DESC STUDENTS; -- [[ COPYPASTE OF THE OUTPUT in CSV Format and terminate with ; ]]
+DESC StudentDetails; -- [[ COPYPASTE OF THE OUTPUT in CSV Format and terminate with ; ]]
+/*'StudentID', 'varchar(10)', 'NO', 'PRI', NULL, ''
+'FirstName', 'varchar(15)', 'YES', '', NULL, ''
+'Surname', 'varchar(15)', 'YES', '', NULL, ''
+'DOB', 'date', 'YES', '', NULL, ''
+'gender', 'varchar(2)', 'YES', '', NULL, ''
+'age', 'int', 'YES', '', NULL, ''
+'PhoneNumber', 'varchar(15)', 'YES', '', NULL, ''*/
 
 -- Task 5: Modify the Courses Table
 -- Change the data type of the 'Credits' column to DECIMAL.
 -- Write your SQL query below Codespace:
+alter table Course modify Credits decimal(5,2);
 
 -- Task 6: Drop Tables
 
 SHOW TABLES; -- Before dropping the table
+/*'course'
+'enrollmentdetails'
+'studentdetails'*/
 
 -- Drop the 'Courses' and 'Enrollments' tables from the database.
 -- Write your SQL query below Codespace:
+drop table EnrollmentDetails;
+drop table Course;
 
 SHOW TABLES; -- After dropping the table Enrollement and Course
+/*'studentdetails'*/
 
 -- End of Lab Experiment 01
 -- Upload the Completed worksheet in the google classroom with file name USN _ LabExperiment01
